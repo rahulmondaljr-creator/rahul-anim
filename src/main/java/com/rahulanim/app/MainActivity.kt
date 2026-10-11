@@ -98,7 +98,7 @@ class MainActivity : Activity() {
         root.addView(scene, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
 
         spPreset.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.setPreset(pos) }
+            override fun applyPreset(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.setPreset(pos) }
             override fun onNothingSelected(p: AdapterView<*>?) {}
         }
         spStyle.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -123,7 +123,8 @@ class MainActivity : Activity() {
             override fun onDone(id: String?) { id?.let { scene.pending.remove(it)?.invoke() } }
         })
         scene.tts = tts
-        scene.setPreset(0)
+        scene.applyPreset(0)
+     
         startFrameLoop()
     }
 
@@ -176,7 +177,8 @@ class SceneView(ctx: android.content.Context) : View(ctx) {
     private var playing = false
     private val P = Paint(Paint.ANTI_ALIAS_FLAG)
 
-    fun setPreset(pos: Int) {
+        fun applyPreset(pos: Int) {
+            
         preset = pos
         bgBitmap = null
         props = when (pos) {
