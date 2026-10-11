@@ -97,9 +97,15 @@ class MainActivity : Activity() {
         scene = SceneView(this)
         root.addView(scene, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
 
-        spPreset.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun applyPreset(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.setPreset(pos) }
+                spPreset.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.applyPreset(pos) }
             override fun onNothingSelected(p: AdapterView<*>?) {}
+        }
+        spStyle.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.style = pos }
+            override fun onNothingSelected(p: AdapterView<*>?) {}
+        }
+
         }
         spStyle.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p: AdapterView<*>?, v: View?, pos: Int, id: Long) { scene.style = pos }
